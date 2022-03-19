@@ -53,6 +53,16 @@ class Amanita extends Items{
 }
 // Змея 
 class Snake{
+    #player = {
+        name: null,
+        skin: null,
+        keys: {
+            topKey: null,
+            bottomKey: null,
+            leftKey: null,
+            rightKey: null
+        }
+    }
     constructor(x, y, snakeHeadX, snakeHeadY){
         this.x = x * cellSize;
         this.y = y * cellSize;
@@ -61,41 +71,41 @@ class Snake{
     }
 }
 
-// Змея 1 для 1 игрока
-class Player1 extends Snake {
+// // Змея 1 для 1 игрока
+// class Player1 extends Snake {
 
-    Move(e){
-        if (e.keyCode == 37 && pos != 'right'){
-            pos = 'left';
-            console.log(pos);  
-        }  
-        if (e.keyCode == 38 && pos != 'down') pos = 'up';
-        if (e.keyCode == 39 && pos != 'left') pos = 'right';
-        if (e.keyCode == 40 && pos != 'up') pos = 'down';
-    }
+//     Move(e){
+//         if (e.keyCode == 37 && pos != 'right'){
+//             pos = 'left';
+//             console.log(pos);  
+//         }  
+//         if (e.keyCode == 38 && pos != 'down') pos = 'up';
+//         if (e.keyCode == 39 && pos != 'left') pos = 'right';
+//         if (e.keyCode == 40 && pos != 'up') pos = 'down';
+//     }
 
-    getName(){
-        return //to do...
-    }
-}
+//     getName(){
+//         return //to do...
+//     }
+// }
 
-// Змея 2 для 2 игрока
-class Player2 extends Snake{
+// // Змея 2 для 2 игрока
+// class Player2 extends Snake{
 
-    Move(e){
-        if (e.keyCode == 65 && pos != 'right'){
-            pos = 'left';
-            console.log(pos);  
-        }  
-        if (e.keyCode == 87 && pos != 'down') pos = 'up';
-        if (e.keyCode == 68 && pos != 'left') pos = 'right';
-        if (e.keyCode == 83 && pos != 'up') pos = 'down';
-    }
+//     Move(e){
+//         if (e.keyCode == 65 && pos != 'right'){
+//             pos = 'left';
+//             console.log(pos);  
+//         }  
+//         if (e.keyCode == 87 && pos != 'down') pos = 'up';
+//         if (e.keyCode == 68 && pos != 'left') pos = 'right';
+//         if (e.keyCode == 83 && pos != 'up') pos = 'down';
+//     }
 
-    getName(){
-        return //to do...
-    }
-}
+//     getName(){
+//         return //to do...
+//     }
+// }
 
 // function gameLoop(){
 //     let bg = new Image(); bg.src = "img/bg.jpg";
@@ -115,25 +125,23 @@ function gameConfig()
     let tripleBanana = new Banana('img/banana3.png');  tripleBanana.Spawn();
     let mushroom = new Amanita('img/mushroom.png');  mushroom.Spawn();
 
-
-    for (let i = 0; i <= GetRandom(0, 3); i++)
-    {
-        let apple = new Apple('img/apple.png');
-        apple.Spawn();
+    for (let i = 0; i <= GetRandom(0, 3); i++){
+        let apple = new Apple('img/apple.png'); apple.Spawn();
     }
 
-    for (let i = 0; i <= GetRandom(0, 10); i++)
-    {
-        let rock = new Rock('img/stone.png');
-        rock.Spawn();
+    for (let i = 0; i <= GetRandom(0, 10); i++){
+        let rock = new Rock('img/stone.png'); rock.Spawn();
     }
+
 } setTimeout(gameConfig, 0);
 
-let snake1 = new Player1(3,4);
-let snake2 = new Player2(2,8);
+// let snake1 = new Player1(3,4);
+// let snake2 = new Player2(2,8);
 
-document.addEventListener('keydown', (e) => snake1.Move(e));   
-document.addEventListener('keydown', (e) => snake2.Move(e)); 
+// document.addEventListener('keydown', (e) => snake1.Move(e));   
+// document.addEventListener('keydown', (e) => snake2.Move(e));
+
+
 
 function GetRandom(min, max){ return Math.floor(Math.random() * (max - min) + min); }
 
