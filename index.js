@@ -32,6 +32,7 @@ class Apple extends Items{
 }
 
 class Banana extends Items{
+    // Расписать таймер и секунды
     increaseTime(timer){
         date.setSeconds(seconds + 10);
     }
@@ -39,6 +40,10 @@ class Banana extends Items{
 
 // Дебаффы
 class Rock extends Items{
+    constructor(damage = 0){
+        this.damage = damage;
+    }
+    
     takeDmg(damage){
         // Расписать score и массив snake
         score -= damage;
@@ -71,53 +76,9 @@ class Snake{
     }
 }
 
-// // Змея 1 для 1 игрока
-// class Player1 extends Snake {
 
-//     Move(e){
-//         if (e.keyCode == 37 && pos != 'right'){
-//             pos = 'left';
-//             console.log(pos);  
-//         }  
-//         if (e.keyCode == 38 && pos != 'down') pos = 'up';
-//         if (e.keyCode == 39 && pos != 'left') pos = 'right';
-//         if (e.keyCode == 40 && pos != 'up') pos = 'down';
-//     }
-
-//     getName(){
-//         return //to do...
-//     }
-// }
-
-// // Змея 2 для 2 игрока
-// class Player2 extends Snake{
-
-//     Move(e){
-//         if (e.keyCode == 65 && pos != 'right'){
-//             pos = 'left';
-//             console.log(pos);  
-//         }  
-//         if (e.keyCode == 87 && pos != 'down') pos = 'up';
-//         if (e.keyCode == 68 && pos != 'left') pos = 'right';
-//         if (e.keyCode == 83 && pos != 'up') pos = 'down';
-//     }
-
-//     getName(){
-//         return //to do...
-//     }
-// }
-
-// function gameLoop(){
-//     let bg = new Image(); bg.src = "img/bg.jpg";
-//     context.drawImage(bg, 0, 0);
-//     let apple = new Apple('img/apple.png'); apple.Spawn();
-//     let banana = new Banana('img/banana.png'); banana.Spawn();
-//     let rock = new Rock('img/stone.png'); rock.Spawn(); let rock2 =  new Rock('img/stone.png'); rock2.Spawn(); let rock3 =  new Rock('img/stone.png'); rock3.Spawn();
-//     let mushroom = new Amanita('img/mushroom.png'); mushroom.Spawn();
-// }
-
-function gameConfig()
-{
+// Конфиг игры -- запускается один раз по вызову
+function gameConfig(){
     let bg = new Image(); bg.src = "img/bg.jpg";
     context.drawImage(bg, 0, 0);
     let singleBanana = new Banana('img/banana1.png');  singleBanana.Spawn();
@@ -135,13 +96,12 @@ function gameConfig()
 
 } setTimeout(gameConfig, 0);
 
-// let snake1 = new Player1(3,4);
-// let snake2 = new Player2(2,8);
 
-// document.addEventListener('keydown', (e) => snake1.Move(e));   
-// document.addEventListener('keydown', (e) => snake2.Move(e));
 
+// Луп игры
+function gameLoop(){
+
+} setTimeout(gameLoop, 100);
 
 
 function GetRandom(min, max){ return Math.floor(Math.random() * (max - min) + min); }
-
