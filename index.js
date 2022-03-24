@@ -40,10 +40,6 @@ class Banana extends Items{
 
 // Дебаффы
 class Rock extends Items{
-    constructor(damage = 0){
-        this.damage = damage;
-    }
-    
     takeDmg(damage){
         // Расписать score и массив snake
         score -= damage;
@@ -58,16 +54,16 @@ class Amanita extends Items{
 }
 // Змея 
 class Snake{
-    #player = {
-        name: null,
-        skin: null,
-        keys: {
-            topKey: null,
-            bottomKey: null,
-            leftKey: null,
-            rightKey: null
-        }
-    }
+    // #player = {
+    //     name: null,
+    //     skin: null,
+    //     keys: {
+    //         topKey: null,
+    //         bottomKey: null,
+    //         leftKey: null,
+    //         rightKey: null
+    //     }
+    // }
     constructor(x, y, snakeHeadX, snakeHeadY){
         this.x = x * cellSize;
         this.y = y * cellSize;
@@ -76,9 +72,63 @@ class Snake{
     }
 }
 
+// Змея 1 для 1 игрока
+class Player1 extends Snake {
+
+    Move(e){
+        if (e.keyCode == 37 && pos != 'right'){
+            pos = 'left';
+            console.log(pos);  
+        }  
+        if (e.keyCode == 38 && pos != 'down'){
+            pos = 'up';
+            console.log(pos);
+        }
+        if (e.keyCode == 39 && pos != 'left'){
+            pos = 'right';
+            console.log(pos);
+        }
+        if (e.keyCode == 40 && pos != 'up'){
+            pos = 'down';
+            console.log(pos);
+        }
+    }
+
+    getName(){
+        return //to do...
+    }
+}
+
+// Змея 2 для 2 игрока
+class Player2 extends Snake{
+
+    Move(e){
+        if (e.keyCode == 65 && pos != 'right'){
+            pos = 'a';
+            console.log(pos);  
+        }  
+        if (e.keyCode == 87 && pos != 'down'){
+            pos = 'w';
+            console.log(pos);
+        }
+        if (e.keyCode == 68 && pos != 'left'){
+            pos = 'd';
+            console.log(pos);
+        }
+        if (e.keyCode == 83 && pos != 'up'){
+            pos = 's';
+            console.log(pos);
+        } 
+    }
+
+    getName(){
+        return //to do...
+    }
+}
+
 
 // Конфиг игры -- запускается один раз по вызову
-function gameConfig(){
+let gameStart = function gameConfig(){
     let bg = new Image(); bg.src = "img/bg.jpg";
     context.drawImage(bg, 0, 0);
     let singleBanana = new Banana('img/banana1.png');  singleBanana.Spawn();
@@ -94,13 +144,22 @@ function gameConfig(){
         let rock = new Rock('img/stone.png'); rock.Spawn();
     }
 
-} setTimeout(gameConfig, 0);
+}
 
+setInterval(gameStart, 100); //
+
+// Спавн змеи
+let snake1 = new Player1(3,4);
+let snake2 = new Player2(2,8);
+
+// Отслеживание нажатия у каждого игрока
+document.addEventListener('keydown', (e) => snake1.Move(e));   
+document.addEventListener('keydown', (e) => snake2.Move(e)); 
 
 
 // Луп игры
 function gameLoop(){
-
+    
 } setTimeout(gameLoop, 100);
 
 
