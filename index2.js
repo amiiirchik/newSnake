@@ -31,7 +31,8 @@ let snake = new Snake(  {
                             topKey:37, 
                             bottomKey:38, 
                             leftKey:39, 
-                            rightKey:40}
+                            rightKey:40
+                            }
                         }
                     );
 
