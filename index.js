@@ -65,10 +65,26 @@ class Snake{
     //     }
     // }
     constructor(x, y, snakeHeadX, snakeHeadY){
-        this.x = x * cellSize;
-        this.y = y * cellSize;
+        this.x = x;
+        this.y = y;
         this.snakeHeadX = snakeHeadX;
         this.snakeHeadY = snakeHeadY;
+    }
+
+    getX(){
+        return this.x;
+    }
+
+    getY(){
+        return this.y;
+    }
+
+    getSnakeHeadY(){
+        return ((this.snakeHeadY * this.y) + cellSize);
+    }
+
+    getSnakeHeadX(){
+        return ((this.snakeHeadX * this.x) + cellSize);
     }
 }
 
@@ -78,18 +94,22 @@ class Player1 extends Snake {
     Move(e){
         if (e.keyCode == 37 && pos != 'right'){
             pos = 'left';
+            snake1.x -= 16;
             console.log(pos);  
         }  
         if (e.keyCode == 38 && pos != 'down'){
             pos = 'up';
+            snake1.y -= 16;
             console.log(pos);
         }
         if (e.keyCode == 39 && pos != 'left'){
             pos = 'right';
+            snake1.x += 16;
             console.log(pos);
         }
         if (e.keyCode == 40 && pos != 'up'){
             pos = 'down';
+            snake1.y += 16;
             console.log(pos);
         }
     }
@@ -128,7 +148,7 @@ class Player2 extends Snake{
 
 
 // Конфиг игры -- запускается один раз по вызову
-let gameStart = function gameConfig(){
+function gameConfig(){
     let bg = new Image(); bg.src = "img/bg.jpg";
     context.drawImage(bg, 0, 0);
     let singleBanana = new Banana('img/banana1.png');  singleBanana.Spawn();
@@ -144,12 +164,11 @@ let gameStart = function gameConfig(){
         let rock = new Rock('img/stone.png'); rock.Spawn();
     }
 
-}
-
-setInterval(gameStart, 100); //
+} gameConfig();
 
 // Спавн змеи
-let snake1 = new Player1(3,4);
+let snake1 = new Player1(3,7);
+console.log(snake1);
 let snake2 = new Player2(2,8);
 
 // Отслеживание нажатия у каждого игрока
@@ -159,8 +178,22 @@ document.addEventListener('keydown', (e) => snake2.Move(e));
 
 // Луп игры
 function gameLoop(){
-    
-} setTimeout(gameLoop, 100);
+    for (let i = 0; i < Object.keys(snake1).length; i++) {
+        context.fillStyle = "red";
+        context.fillRect(snake1.getX(), snake1.getY(), cellSize, cellSize);
+        
+        let newHead = {
+            x: snake1.getX(),
+            y: snake1.getY()
+        }
+
+        Array.from(snake1).unshift(newHead);
+    }
+
+    Array.from(snake1).pop();
+    console.log('gameloop');
+
+} setInterval(gameLoop, 100);
 
 
 function GetRandom(min, max){ return Math.floor(Math.random() * (max - min) + min); }
